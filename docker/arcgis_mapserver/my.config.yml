@@ -1,0 +1,125 @@
+# =================================================================
+#
+# Authors: Just van den Broecke <justb4@gmail.com>>
+#          Jorge Samuel Mendes de Jesus <jorge.dejesus@geocat.net>
+#
+# Copyright (c) 2019 Just van den Broecke
+# Copyright (c) 2019 Jorge Samuel Mendes de Jesus
+#
+# Permission is hereby granted, free of charge, to any person
+# obtaining a copy of this software and associated documentation
+# files (the "Software"), to deal in the Software without
+# restriction, including without limitation the rights to use,
+# copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the
+# Software is furnished to do so, subject to the following
+# conditions:
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+# WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+#
+# =================================================================
+
+server:
+    bind:
+        host: 0.0.0.0
+        port: 80
+    url: http://localhost:5000
+    mimetype: application/json; charset=UTF-8
+    encoding: utf-8
+    gzip: false
+    language: en-US
+    cors: true
+    pretty_print: true
+    limits:
+        default_items: 10
+        max_items: 50
+    # templates: /path/to/templates
+    map:
+        url: https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png
+        attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+
+logging:
+    level: ERROR
+    #logfile: /tmp/pygeoapi.log
+
+metadata:
+    identification:
+        title: pygeoapi default instance
+        description: pygeoapi provides an API to geospatial data
+        keywords:
+            - geospatial
+            - data
+            - api
+        keywords_type: theme
+        terms_of_service: https://creativecommons.org/licenses/by/4.0/
+        url: http://example.org
+    license:
+        name: CC-BY 4.0 license
+        url: https://creativecommons.org/licenses/by/4.0/
+    provider:
+        name: Organization Name
+        url: https://pygeoapi.io
+    contact:
+        name: Lastname, Firstname
+        position: Position Title
+        address: Mailing Address
+        city: City
+        stateorprovince: Administrative Area
+        postalcode: Zip or Postal Code
+        country: Country
+        phone: +xx-xxx-xxx-xxxx
+        fax: +xx-xxx-xxx-xxxx
+        email: you@example.org
+        url: Contact URL
+        hours: Hours of Service
+        instructions: During hours of service.  Off on weekends.
+        role: pointOfContact
+resources:
+  ch.babs.notfalltreffpunkte:
+    type: collection
+    title: ch.babs.notfalltreffpunkte #ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill
+    description: Points de rencontre d'urgence PRU #Swiss Municipal Boundaries
+    keywords: [swisstopo, ch, api3.geo.admin.ch]
+    extents:
+      spatial:
+        bbox: [3.8941377107779678,44.31215584649377,13.650793633747197,48.70361235390055] #[2420000.0, 1030000.0, 2900000.0, 1350000.0]
+        crs: '4326' #2056
+    providers:
+      - type: feature
+        name: arcgis_mapserver.ArcGISMapServer
+        data: https://api3.geo.admin.ch/rest/services/api/MapServer/identify
+        layer: ch.babs.notfalltreffpunkte #ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill
+        id_field: featureId
+        crs:
+          - http://www.opengis.net/def/crs/EPSG/0/2056
+          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+        storage_crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84 #http://www.opengis.net/def/crs/EPSG/0/2056
+  ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill:
+    type: collection
+    title: ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill
+    description: Swiss Municipal Boundaries
+    keywords: [swisstopo, ch, api3.geo.admin.ch]
+    extents:
+      spatial:
+        bbox: [3.8941377107779678,44.31215584649377,13.650793633747197,48.70361235390055] #[2420000.0, 1030000.0, 2900000.0, 1350000.0]
+        crs: '4326' #2056
+    providers:
+      - type: feature
+        name: arcgis_mapserver.ArcGISMapServer
+        data: https://api3.geo.admin.ch/rest/services/api/MapServer/identify
+        layer: ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill
+        id_field: featureId
+        crs:
+          - http://www.opengis.net/def/crs/EPSG/0/2056
+          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
+        storage_crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84 #http://www.opengis.net/def/crs/EPSG/0/2056
