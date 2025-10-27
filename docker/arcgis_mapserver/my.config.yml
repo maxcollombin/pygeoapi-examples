@@ -97,7 +97,7 @@ resources:
     providers:
       - type: feature
         name: arcgis_mapserver.ArcGISMapServer
-        data: https://api3.geo.admin.ch/rest/services/api/MapServer/identify
+        data: https://api3.geo.admin.ch/rest/services/api/MapServer
         layer: ch.babs.notfalltreffpunkte #ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill
         id_field: featureId
         crs:
@@ -116,7 +116,7 @@ resources:
     providers:
       - type: feature
         name: arcgis_mapserver.ArcGISMapServer
-        data: https://api3.geo.admin.ch/rest/services/api/MapServer/identify
+        data: https://api3.geo.admin.ch/rest/services/api/MapServer
         layer: ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill
         id_field: featureId
         crs:
